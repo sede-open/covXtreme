@@ -15,6 +15,9 @@ edit_uri: ""
 
 docs_dir: docs
 
+permissions:
+  id-token: write
+
 # Configuration
 theme:
   name: material
