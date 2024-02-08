@@ -78,9 +78,6 @@ plugins:
             docstring_style: "google"
   - tags
 
-watch:
-  - src/pyelq
-
 markdown_extensions:
   - attr_list
   - md_in_html
