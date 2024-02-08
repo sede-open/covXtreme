@@ -5,7 +5,7 @@
 ---
 # Project information
 site_name: covXtreme
-site_author: covXtreme
+site_author: 
 site_description: >-
 This repository contains software for the penalised piecewise constant covariate marginal and conditional extreme value models that allows for contour estimation.
 # Repository
@@ -14,6 +14,9 @@ repo_url: https://github.com/sede-open/covXtreme
 edit_uri: ""
 
 docs_dir: docs
+
+permissions:
+  id-token: write
 
 # Configuration
 theme:
