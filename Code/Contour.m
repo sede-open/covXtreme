@@ -197,7 +197,7 @@ classdef Contour
                 EdgCnd{iQ} = Cnt.addPointToLinspace(mCnd, MCnd, Cnt.LvlOrg(iBin,iQ,1), Cnt.nGrd);
 
                 mAsc = min(Cnt.Sml.Org(I_notinf, iAsc+1));
-                MAsc = Lmt(1) * 1.3;
+                MAsc = Lmt(2) * 1.3;
                 if MAsc > max(Mrg(iAsc+1).Y) + Cnt.maxAscRng*range(Mrg(iAsc+1).Y)
                     MAsc = max(Mrg(iAsc+1).Y) + Cnt.maxAscRng*range(Mrg(iAsc+1).Y);
                 end
