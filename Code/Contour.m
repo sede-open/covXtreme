@@ -186,7 +186,7 @@ classdef Contour
             nQ = size(Cnt.LvlOrg,2);
             [EdgCnd, EdgAsc] = deal(cell(nQ,1));
             for iQ = 1:size(Cnt.LvlOrg,2)
-                Lmt = squeeze(Cnt.LvlOrg(end, end, [1,iAsc+1]));
+                Lmt = squeeze(Cnt.LvlOrg(iBin, iQ, [1,iAsc+1]));
                 I_notinf = ~isinf(Cnt.Sml.Org(:, iAsc+1));
                 if ~isempty(A)
                     I_notinf = I_notinf & (A == iBin);
@@ -197,10 +197,20 @@ classdef Contour
                 EdgCnd{iQ} = Cnt.addPointToLinspace(mCnd, MCnd, Cnt.LvlOrg(iBin,iQ,1), Cnt.nGrd);
 
                 mAsc = min(Cnt.Sml.Org(I_notinf, iAsc+1));
-                MAsc = Lmt(2) * 1.3;
-                if MAsc > max(Mrg(iAsc+1).Y) + Cnt.maxAscRng*range(Mrg(iAsc+1).Y)
-                    MAsc = max(Mrg(iAsc+1).Y) + Cnt.maxAscRng*range(Mrg(iAsc+1).Y);
-                end
+                
+                %% Upper bound
+                % should be larger than
+                % - 30% of lock point value
+                minBnd = Lmt(2) * 1.3;
+
+                % upper bound should be smaller than 
+                % - 30% of max siml (could be large because of bad bootstraps)
+                maxSml = max(Cnt.Sml.Org(:,iAsc+1)) * 1.3;
+                % - max(data) + maxAscRng * range(data)
+                maxBnd = max(Mrg(iAsc+1).Y) + Cnt.maxAscRng*range(Mrg(iAsc+1).Y);
+
+                MAsc = max(minBnd, min(maxSml, maxBnd));
+
                 EdgAsc{iQ} = Cnt.addPointToLinspace(mAsc, MAsc, Cnt.LvlOrg(iBin,iQ,iAsc+1), Cnt.nGrd);
             end
         end % createEdg
